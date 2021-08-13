@@ -7,11 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    GraphQLFederationModule.forRoot({
-      // cors: {
-      //   origin: 'http://localhost:4200',
-      //   credentials: true,
-      // },
+    GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/graphql-schema.gql'),
       uploads: false,
       // context: req => ({ req }),

@@ -4,7 +4,7 @@ import { IsNotEmpty } from "class-validator";
 @InputType()
 export class CreateStudentInput {
     @Field((type) => Int) 
-    id: number;
+    id?: number;
     @Field()
     name: string;
     @Field()

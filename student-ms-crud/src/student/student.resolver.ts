@@ -23,12 +23,13 @@ export class StudentResolver {
         return this.studentService.updateStudent(updateStudentInput);
     }
 
-    @Mutation(() => Number) //bool denoted return type from the query
-    async deleteStudent(@Args('deleteStudentInput') deleteStudentInput: DeleteStudentInput): Promise<number> {
+    @Mutation(() => Boolean) //bool denoted return type from the query
+    async deleteStudent(@Args('deleteStudentInput') deleteStudentInput: DeleteStudentInput): Promise<boolean> {
         return this.studentService.deleteStudent(deleteStudentInput);
     }
-    @ResolveReference()
-    resolveReference(ref: { __typename: string, id: string}): any {
-        return true;
+    @Mutation(() => Boolean) //bool denoted return type from the query
+    async saveAllStudents(@Args({name:'createStudents', type: () => [CreateStudentInput]}) createStudents: CreateStudentInput[]): Promise<boolean> {
+        console.log(createStudents, 'createStudents')
+        return this.studentService.saveAllStudents(createStudents);
     }
 }

@@ -60,7 +60,7 @@ export class StudentService {
     });
   }
 
-  async deleteStudent(deleteStudent: DeleteStudentInput): Promise<number> {
+  async deleteStudent(deleteStudent: DeleteStudentInput): Promise<boolean> {
     const mutation = `mutation DeleteStudentById($id: Int!){
             deleteStudentById(input: {id: $id}) {
                 student {
@@ -72,7 +72,23 @@ export class StudentService {
     return request(this.endPoint, mutation, {
       id: deleteStudent.id,
     }).then((data) => {
-      return data.deleteStudentById.student.id;
+      return true;
+    });
+  }
+
+  async saveAllStudents(createStudents: CreateStudentInput[]): Promise<boolean> {
+    const mutation = `mutation StudentBulkUpload($createStudents: [StudentInput!]!) {
+      createBulkUpload(input: {students: $createStudents}) {
+        __typename
+      }
+    }`
+
+    return request(this.endPoint, mutation, {
+      createStudents: createStudents
+    }).then((data) => {
+      return true;
+    }, (error) => {
+      return false
     });
   }
 

@@ -1,3 +1,4 @@
+import { RemoteGraphQLDataSource } from '@apollo/gateway';
 import { Module } from '@nestjs/common';
 import { GraphQLGatewayModule } from '@nestjs/graphql';
 import FileUploadDataSource from '@profusion/apollo-federation-upload';
@@ -14,7 +15,17 @@ import FileUploadDataSource from '@profusion/apollo-federation-upload';
         },
       },
       gateway: {
-        buildService: ({ url }) => new FileUploadDataSource({ url, useChunkedTransfer: true }),
+        buildService({ url }) {
+          return new RemoteGraphQLDataSource({
+            url,
+            willSendRequest({ request, context }) {
+              // Promise { { filename, mimetype, encoding, createReadStream } }
+              //request.http.headers.set('something', 'data');
+              console.log(context, "CONTEXT")
+              console.log(request.variables, "HITS the gateway")
+            },
+          });
+        },
         serviceList: [
           { name: 'crud', url: "http://localhost:3002/graphql" },
           { name: 'upload', url: "http://localhost:3001/graphql" },

@@ -21,7 +21,7 @@ export class UploadService {
             await createReadStream()
                 .pipe(createWriteStream(`./uploads/${filename}`))
                 .on('finish', async () => {
-                     await this.fileUploadQueue.add('upload', {
+                    await this.fileUploadQueue.add('upload', {
                         filename
                     });
                     resolve(true);

@@ -5,7 +5,7 @@ import { Directive, Field, Int, ObjectType } from "@nestjs/graphql";
 export class Student {
     
     @Field((type) => Int) // specifies fileds to be included in the table
-    id: number;
+    id?: number;
     @Field()
     name: string;
     @Field((type) => Int, { nullable: true })
