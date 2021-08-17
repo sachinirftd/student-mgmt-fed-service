@@ -29,7 +29,6 @@ export class StudentResolver {
     }
     @Mutation(() => Boolean) //bool denoted return type from the query
     async saveAllStudents(@Args({name:'createStudents', type: () => [CreateStudentInput]}) createStudents: CreateStudentInput[]): Promise<boolean> {
-        console.log(createStudents, 'createStudents')
         return this.studentService.saveAllStudents(createStudents);
     }
 }

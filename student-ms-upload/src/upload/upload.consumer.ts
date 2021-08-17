@@ -57,7 +57,6 @@ export class UploadConsumer {
     }).then(() => {
       return true;
     }, () => {
-      console.log("FSDSD")
       return false
     });
   }
