@@ -10,16 +10,6 @@ import { ConfigModule } from '@nestjs/config';
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/graphql-schema.gql'),
       uploads: false,
-      // context: req => ({ req }),
-      // resolvers: {
-      //   Upload: GraphQLUpload,
-      // },
-    }),
-    BullModule.forRoot({
-      redis: {
-        host: 'localhost',
-        port: 6379,
-      },
     }),
     ConfigModule.forRoot(),
     StudentModule

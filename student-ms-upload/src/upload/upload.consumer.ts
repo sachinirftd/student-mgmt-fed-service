@@ -22,9 +22,7 @@ export class UploadConsumer {
 
   myChannel = this.socket.subscribe('myChannel');
 
-
   constructor(@InjectQueue('file-upload-queue') private fileUploadQueue: Queue) { }
-
 
   @Process('upload')
   async readOperationJob(job: Job<any>) {
@@ -32,7 +30,7 @@ export class UploadConsumer {
     let filename = job.data.filename;
     await xlsxFile(`./uploads/${filename}`).then((rows) => {
       const columnNames = rows.shift(); // Separate first row with column names
-      const objs = rows.map((row) => { // Map the rest of the rows into objects
+      rows.map((row) => { // Map the rest of the rows into objects
         const obj: any = {}; // Create object literal for current row
         row.forEach((cell, i) => {
           obj[columnNames[i]] = cell; // Use index from current cell to get column name, add current cell to new object
