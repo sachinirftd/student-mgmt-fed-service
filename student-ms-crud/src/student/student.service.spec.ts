@@ -33,12 +33,12 @@ describe('StudentService', () => {
     expect(studentSpy).toHaveBeenCalledWith([dto]);
   });
 
-  // it('should update student', async () => {
-  //   const studentSpy = jest.spyOn(service, 'updateStudent');
-  //   const dto = new UpdateStudentInput();
-  //   service.updateStudent(dto);
-  //   expect(studentSpy).toHaveBeenCalledWith(dto);
-  // });
+  it('should update student', async () => {
+    const studentSpy = jest.spyOn(service, 'updateStudent');
+    const dto = new UpdateStudentInput();
+    service.updateStudent(dto);
+    expect(studentSpy).toHaveBeenCalledWith(dto);
+  });
 
   it('should delete student', async () => {
     const studentSpy = jest.spyOn(service, 'deleteStudent');
